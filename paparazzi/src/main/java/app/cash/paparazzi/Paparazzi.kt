@@ -227,8 +227,6 @@ class Paparazzi(
       val viewGroup = bridgeRenderSession.rootViews[0].viewObject as ViewGroup
       try {
         withTime(0L) {
-          // Initialize the choreographer at time=0.
-          Choreographer_Delegate.doFrame(System_Delegate.nanoTime())
         }
 
         viewGroup.addView(view)

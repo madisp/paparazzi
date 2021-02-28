@@ -32,6 +32,7 @@ import java.awt.image.BufferedImage
 import java.io.Closeable
 import java.io.File
 import java.io.IOException
+import java.util.Locale
 
 /** View rendering. */
 internal class Renderer(
@@ -70,14 +71,15 @@ internal class Renderer(
         .withTheme("AppTheme", true)
 
     val fontLocation = File(platformDataDir, "fonts")
+    val icuLocation = File("icu")
     val buildProp = File(environment.platformDir, "build.prop")
     val attrs = File(platformDataResDir, "values" + File.separator + "attrs.xml")
     bridge = Bridge().apply {
       init(
           DeviceConfig.loadProperties(buildProp),
           fontLocation,
-          null,
-          null,
+          getNativeLibLocation(),
+          icuLocation.absolutePath,
           DeviceConfig.getEnumMap(attrs),
           logger
       )
@@ -92,6 +94,16 @@ internal class Renderer(
     }
 
     return sessionParamsBuilder
+  }
+
+  private fun getNativeLibLocation(): String {
+    val osName = System.getProperty("os.name").toLowerCase(Locale.US)
+    val osLabel = when {
+      osName.startsWith("windows") -> "win"
+      osName.startsWith("mac") -> "mac"
+      else -> "linux"
+    }
+    return File(osLabel, "lib64").absolutePath
   }
 
   override fun close() {

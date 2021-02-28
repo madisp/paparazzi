@@ -31,7 +31,7 @@ fun androidHome() = System.getenv("ANDROID_SDK_ROOT")
     ?: "${System.getProperty("user.home")}/Library/Android/sdk"
 
 fun detectEnvironment(): Environment {
-  checkInstalledJvm()
+//  checkInstalledJvm()
 
   val resourcesFile = File(System.getProperty("paparazzi.test.resources"))
   val configLines = resourcesFile.readLines()
