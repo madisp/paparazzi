@@ -4,7 +4,7 @@ buildscript {
   ext.versions = [
     kotlin: '1.4.30',
     agp: '3.6.1',
-    layoutlib: '4.0.0-alpha02-native-5c0b735', // "should" be similar to versions.agp
+    layoutlib: '4.1.0-789fb9e', // "should" be similar to versions.agp
     androidTools: '26.6.0', // agp + 23.0.0 = androidTools
     jcodec: '0.2.5',
     moshi: '1.11.0',
@@ -36,7 +36,7 @@ buildscript {
     androidx: [
       annotations: 'androidx.annotation:annotation:1.1.0'
     ],
-    layoutlib: "app.cash.paparazzi:layoutlib-native:${versions.layoutlib}",
+    layoutlib: "app.cash.paparazzi:layoutlib-native-jdk11:${versions.layoutlib}",
     okio: 'com.squareup.okio:okio:2.8.0',
     moshi: [
       core: "com.squareup.moshi:moshi:${versions.moshi}",
