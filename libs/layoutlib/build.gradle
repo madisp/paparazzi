@@ -28,7 +28,7 @@ task cloneLayoutlib() {
     repo.checkout {
       // maps to this commit: https://android.googlesource.com/platform/prebuilts/studio/layoutlib/+/b169460c8473a1e87aafa01da881556682fa4f86
       // which runs on JDK 11
-      branch = '95a1979'
+      branch = '2df4530'
     }
   }
 
@@ -52,7 +52,7 @@ publishing {
     mavenJava(MavenPublication) {
       groupId = 'app.cash.paparazzi'
       artifactId = 'layoutlib-native'
-      version = '4.0.0-alpha02-native-95a1979'
+      version = '4.0.0-alpha02-native-2df4530'
 
       pom {
         name = "layoutlib"

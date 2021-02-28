@@ -150,8 +150,6 @@ internal class PaparazziCallback(
 
   override fun getActionBarCallback(): ActionBarCallback = actionBarCallback
 
-  override fun supports(ideFeature: Int): Boolean = false
-
   override fun createXmlParserForPsiFile(fileName: String): XmlPullParser? =
     createXmlParserForFile(fileName)
 

@@ -70,15 +70,17 @@ internal class Renderer(
         .plusFlag(RenderParamsFlags.FLAG_DO_NOT_RENDER_ON_CREATE, true)
         .withTheme("AppTheme", true)
 
-    val fontLocation = File(platformDataDir, "fonts")
-    val icuLocation = File("icu")
+    val paparazziDataDir = File("data")
+    val fontLocation = File(paparazziDataDir, "fonts")
+    val nativeLibLocation = File(paparazziDataDir, getNativeLibDir())
+    val icuLocation = File(paparazziDataDir, "icu")
     val buildProp = File(environment.platformDir, "build.prop")
     val attrs = File(platformDataResDir, "values" + File.separator + "attrs.xml")
     bridge = Bridge().apply {
       init(
           DeviceConfig.loadProperties(buildProp),
           fontLocation,
-          getNativeLibLocation(),
+          nativeLibLocation.absolutePath,
           icuLocation.absolutePath,
           DeviceConfig.getEnumMap(attrs),
           logger
@@ -96,14 +98,14 @@ internal class Renderer(
     return sessionParamsBuilder
   }
 
-  private fun getNativeLibLocation(): String {
+  private fun getNativeLibDir(): String {
     val osName = System.getProperty("os.name").toLowerCase(Locale.US)
     val osLabel = when {
       osName.startsWith("windows") -> "win"
       osName.startsWith("mac") -> "mac"
       else -> "linux"
     }
-    return File(osLabel, "lib64").absolutePath
+    return "$osLabel/lib64"
   }
 
   override fun close() {
